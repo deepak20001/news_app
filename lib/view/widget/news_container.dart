@@ -6,12 +6,14 @@ class NewsContainer extends StatelessWidget {
     required this.imgUrl,
     required this.newsHead,
     required this.newsDesc,
+    required this.newsContent,
     required this.newsUrl,
   });
 
   String imgUrl;
   String newsHead;
   String newsDesc;
+  String newsContent;
   String newsUrl;
 
   @override
@@ -45,6 +47,13 @@ class NewsContainer extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     newsDesc,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black38,
+                    ),
+                  ),
+                  Text(
+                    newsContent,
                     style: const TextStyle(
                       fontSize: 16,
                     ),

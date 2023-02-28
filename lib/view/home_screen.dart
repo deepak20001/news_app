@@ -12,10 +12,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late NewsArt newsArt;
+  bool isLoading = true;
 
   getNews() async {
     newsArt = await FetchNews.fetchNews();
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -27,22 +30,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        controller: PageController(initialPage: 0),
-        scrollDirection: Axis.vertical,
-        onPageChanged: (value) {
-          getNews();
-        },
-        itemBuilder: (context, index) {
-          return NewsContainer(
-            imgUrl: newsArt.imgUrl,
-            newsHead: newsArt.newsHead,
-            newsDesc: newsArt.newsDesc,
-            newsContent: newsArt.newsContent,
-            newsUrl: newsArt.newsUrl,
-          );
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: PageView.builder(
+          controller: PageController(initialPage: 0),
+          scrollDirection: Axis.vertical,
+          onPageChanged: (value) {
+            setState(() {
+              isLoading = true;
+            });
+            getNews();
+          },
+          itemBuilder: (context, index) {
+            return isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : NewsContainer(
+                    imgUrl: newsArt.imgUrl,
+                    newsHead: newsArt.newsHead,
+                    newsDesc: newsArt.newsDesc,
+                    newsContent: newsArt.newsContent,
+                    newsUrl: newsArt.newsUrl,
+                  );
+          },
+        ),
       ),
     );
   }

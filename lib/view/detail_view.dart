@@ -15,14 +15,15 @@ class DetailViewScreen extends StatefulWidget {
 }
 
 class _DetailViewScreenState extends State<DetailViewScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
     setState(() {
-      widget.newsUrl = widget.newsUrl.contains("http:") ? widget.newsUrl.replaceAll("http:", "https:") : widget.newsUrl; 
+      widget.newsUrl = widget.newsUrl.contains("http:")
+          ? widget.newsUrl.replaceAll("http:", "https:")
+          : widget.newsUrl;
     });
   }
 
@@ -33,6 +34,7 @@ class _DetailViewScreenState extends State<DetailViewScreen> {
   // ..setBackgroundColor(const Color(0x00000000))
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: WebViewWidget(controller: controller));
+    return SafeArea(
+        child: Scaffold(body: WebViewWidget(controller: controller)));
   }
 }

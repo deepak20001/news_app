@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool showingSplash = true;
 
-  LoadHome() {
+  loadHome() {
     Future.delayed(Duration(seconds: 3), () {
       setState(() {
         showingSplash = false;
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    LoadHome();
+    loadHome();
   }
 
   // This widget is the root of your application.
